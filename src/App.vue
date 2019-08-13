@@ -1,10 +1,10 @@
 <template>
   <div>
     <div id="wrapper">
-      <SideMenu />
+      <side-menu v-show="showSideMenu" />
       <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
-          <header-bar />
+          <header-bar @click="showSideMenu = !showSideMenu" />
           <router-view class="adjustContentRight"></router-view>
         </div>
         <footer class="sticky-footer bg-white">
@@ -30,6 +30,11 @@ export default {
   components: {
     HeaderBar,
     SideMenu
+  },
+  data: () => {
+    return {
+      showSideMenu: true
+    };
   }
 };
 </script>
