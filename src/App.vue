@@ -1,6 +1,7 @@
 <template>
   <div>
     <div id="wrapper">
+      <SideMenu />
       <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
           <header-bar />
@@ -22,11 +23,13 @@
 </template>
 <script>
 import HeaderBar from "@/components/Header";
+import SideMenu from "@/components/SideMenu";
 
 export default {
   name: "App",
   components: {
-    HeaderBar
+    HeaderBar,
+    SideMenu
   }
 };
 </script>
