@@ -1,5 +1,5 @@
 export default {
   setVideos(state, videos) {
-    state.videos = videos;
+    state.tweets = videos;
   }
 };
