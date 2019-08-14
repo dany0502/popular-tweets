@@ -24,7 +24,7 @@
           ><i class="ml-4 mr-1 fas fa-heart"></i
           ><span>{{ tweet.favorite_count }}</span>
         </p>
-        <a href="#">もっと見る</a>
+        <a v-if="getUrl(tweet) !== null" :href="getUrl(tweet)">もっと見る</a>
       </div>
     </div>
   </div>
@@ -42,6 +42,11 @@ export default {
     title: {
       type: String,
       default: "Articles"
+    }
+  },
+  methods: {
+    getUrl(tweet) {
+      return (tweet.entities.urls[0] && tweet.entities.urls[0].url) || null;
     }
   }
 };
