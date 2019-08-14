@@ -5,7 +5,10 @@
     </div>
     <div v-for="(tweet, index) in tweets" :key="index" class="card shadow mb-4">
       <div class="card-header py-3">
-        <img class="img img-profile rounded-circle" src="" />
+        <img
+          class="img img-profile rounded-circle"
+          :src="tweet.user.profile_image_url_https"
+        />
         <h6 class="m-0 ml-3 font-weight-bold text-primary inline">
           {{ tweet.user.name }}
         </h6>
