@@ -9,9 +9,9 @@
           class="img img-profile rounded-circle"
           :src="tweet.user.profile_image_url_https"
         />
-        <h6 class="m-0 ml-3 font-weight-bold text-primary inline">
+        <span class="m-0 ml-3 font-weight-bold text-primary inline">
           {{ tweet.user.name }}
-        </h6>
+        </span>
       </div>
       <div class="card-body">
         <p>{{ tweet.text }}</p>
