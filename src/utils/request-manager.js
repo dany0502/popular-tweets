@@ -1,5 +1,6 @@
 // This module is used to avoid multiple API requests.
 import axios from "axios";
+import errorHandler from "@/errorHandlers/api";
 
 let requests = [];
 axios.interceptors.request.use(
@@ -28,6 +29,7 @@ axios.interceptors.response.use(
   },
   error => {
     popRequest(error);
+    errorHandler(error);
     return Promise.reject(error);
   }
 );
