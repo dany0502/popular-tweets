@@ -25,21 +25,12 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "Articles",
-  data() {
-    return {
-      tweets: [
-        {
-          user: {
-            name: "haru"
-          },
-          text: "hogehoge",
-          retweet_count: 200,
-          favorite_count: 100
-        }
-      ]
-    };
+  computed: {
+    ...mapState("articles", ["tweets"])
   },
   props: {
     title: {
