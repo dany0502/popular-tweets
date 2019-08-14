@@ -25,6 +25,7 @@
         >
           <video
             v-lazy-load
+            v-auto-play
             autoplay
             playsinline
             width="100%"
