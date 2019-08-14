@@ -6,8 +6,9 @@
     <div v-for="(tweet, index) in tweets" :key="index" class="card shadow mb-4">
       <div class="card-header py-3">
         <img
+          v-lazy-load
           class="img img-profile rounded-circle"
-          :src="tweet.user.profile_image_url_https"
+          :data-src="tweet.user.profile_image_url_https"
         />
         <span class="m-0 ml-3 font-weight-bold text-primary inline">
           {{ tweet.user.name }}
