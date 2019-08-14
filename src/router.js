@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Articles from "@/views/Articles";
 import { ARTICLES, VIDEOS } from "@/constants/route";
+import store from "@/store";
 Vue.use(Router);
 
 export default new Router({
@@ -14,7 +15,18 @@ export default new Router({
     {
       path: ARTICLES.path,
       name: ARTICLES.name,
-      component: Articles
+      component: Articles,
+      beforeEnter: (to, from, next) => {
+        store
+          .dispatch("articles/getArticles")
+          .then(() => {
+            next();
+          })
+          .catch(() => {
+            // TODO: Show error view
+            next();
+          });
+      }
     },
     {
       path: VIDEOS.path,

@@ -5,7 +5,7 @@
       <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
           <header-bar @click="showSideMenu = !showSideMenu" />
-          <router-view class="adjustContentRight"></router-view>
+          <router-view></router-view>
         </div>
         <footer class="sticky-footer bg-white">
           <div class="container my-auto">
