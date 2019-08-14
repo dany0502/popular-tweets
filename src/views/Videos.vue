@@ -18,13 +18,33 @@
       </div>
       <div class="card-body">
         <p>{{ tweet.text }}</p>
+        <div
+          v-if="videoUrl(tweet) !== null"
+          :style="ratio(tweet)"
+          class="mb-3 video-container animation-container"
+        >
+          <video
+            v-lazy-load
+            autoplay
+            playsinline
+            width="100%"
+            :data-src="videoUrl(tweet)"
+            type="video/*"
+            class="video"
+            muted
+          >
+            <p>Your browser does not support the video tag.</p>
+          </video>
+        </div>
         <p>
           <i class="mr-1 fas fa-retweet"></i
           ><span>{{ tweet.retweet_count }}</span
           ><i class="ml-4 mr-1 fas fa-heart"></i
           ><span>{{ tweet.favorite_count }}</span>
         </p>
-        <a v-if="getUrl(tweet) !== null" :href="getUrl(tweet)">もっと見る</a>
+        <a v-if="getSeeMoreUrl(tweet) !== null" :href="getSeeMoreUrl(tweet)"
+          >もっと見る</a
+        >
       </div>
     </div>
   </div>
@@ -39,9 +59,43 @@ export default {
     ...mapState("videos", ["tweets"])
   },
   methods: {
-    getUrl(tweet) {
+    getSeeMoreUrl(tweet) {
       return (tweet.entities.urls[0] && tweet.entities.urls[0].url) || null;
+    },
+    media(tweet) {
+      const entity = (tweet && tweet.extended_entities) || {};
+      return (entity.media && entity.media[0]) || {};
+    },
+    videoUrl(tweet) {
+      const media = this.media(tweet);
+      const variants = (media.video_info && media.video_info.variants) || [];
+      return (variants[0] && variants[0].url) || null;
+    },
+    ratio(tweet) {
+      const videoInfo = this.media(tweet).video_info;
+      const w = videoInfo && videoInfo.aspect_ratio[0];
+      const h = videoInfo && videoInfo.aspect_ratio[1];
+      return `padding-bottom:${(100 * h) / w}%`;
     }
   }
 };
 </script>
+<style scoped>
+.video {
+  width: 100%;
+}
+.video-container {
+  width: 100%;
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  background-color: gainsboro;
+}
+
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+</style>
