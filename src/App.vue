@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading :show="loading" />
     <div id="wrapper">
       <side-menu v-show="showSideMenu" />
       <div id="content-wrapper" class="d-flex flex-column">
@@ -22,19 +23,26 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
+
 import HeaderBar from "@/components/Header";
 import SideMenu from "@/components/SideMenu";
+import Loading from "@/components/Loading";
 
 export default {
   name: "App",
   components: {
     HeaderBar,
-    SideMenu
+    SideMenu,
+    Loading
   },
   data: () => {
     return {
       showSideMenu: true
     };
+  },
+  computed: {
+    ...mapState("common", ["loading"])
   }
 };
 </script>

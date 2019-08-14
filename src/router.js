@@ -17,13 +17,16 @@ export default new Router({
       name: ARTICLES.name,
       component: Articles,
       beforeEnter: (to, from, next) => {
+        store.commit("common/showLoading", true);
         store
           .dispatch("articles/getArticles")
           .then(() => {
+            store.commit("common/showLoading", false);
             next();
           })
           .catch(() => {
             // TODO: Show error view
+            store.commit("common/showLoading", false);
             next();
           });
       }
