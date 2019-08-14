@@ -1,5 +1,5 @@
 export default {
   setArticles(state, articles) {
-    state.articles = articles;
+    state.tweets = articles;
   }
 };
