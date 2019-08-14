@@ -1,10 +1,11 @@
+// This module is used to avoid multiple API requests.
 import axios from "axios";
 
 let requests = [];
-
 axios.interceptors.request.use(
   config => {
     const request = requests.find(url => url === config.url);
+    // Cancel request if previos request is not finished.
     if (request) {
       return {
         ...config,
