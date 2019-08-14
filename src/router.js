@@ -35,6 +35,20 @@ export default new Router({
     {
       path: VIDEOS.path,
       name: VIDEOS.name,
+      beforeEnter: (to, from, next) => {
+        store.commit("common/showLoading", true);
+        store
+          .dispatch("videos/getVideos")
+          .then(() => {
+            store.commit("common/showLoading", false);
+            next();
+          })
+          .catch(() => {
+            // TODO: Show error view
+            store.commit("common/showLoading", false);
+            next();
+          });
+      },
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
