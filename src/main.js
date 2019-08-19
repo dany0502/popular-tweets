@@ -7,6 +7,7 @@ import lazyLoad from "@/directives/lazy-load";
 import autoPlay from "@/directives/auto-play";
 import vueErrorHandler from "@/errorHandlers/vue";
 import "@/utils/request-manager";
+import "@/registerServiceWorker";
 
 Vue.config.errorHandler = vueErrorHandler;
 Vue.config.productionTip = false;
