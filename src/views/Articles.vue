@@ -13,7 +13,7 @@
           <img
             width="48px"
             height="48px"
-            v-lazy-load
+            v-lazy-load="{ defaultImageUrl }"
             class="img img-profile rounded-circle"
             :data-src="tweet.user.profile_image_url_https"
           />
@@ -45,6 +45,7 @@
 <script>
 import { mapState } from "vuex";
 import { CardContainer, CardHeader, CardBody } from "@/components/Card";
+import { DEFAULT_PROFILE_IMAGE } from "@/constants/images";
 
 export default {
   name: "Articles",
@@ -52,6 +53,11 @@ export default {
     CardContainer,
     CardHeader,
     CardBody
+  },
+  data() {
+    return {
+      defaultImageUrl: DEFAULT_PROFILE_IMAGE
+    };
   },
   computed: {
     ...mapState("articles", ["tweets"])
