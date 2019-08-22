@@ -5,6 +5,20 @@ const DEFAULT_VISIBILITY_THRESHOLD = 0.5;
 
 export default {
   bind(el, binding) {
+    const imageUrl = (binding.value && binding.value.defaultImageUrl) || null;
+    if (imageUrl !== null) {
+      // Show default image if failed to load original image.
+      el.addEventListener(
+        "error",
+        () => {
+          el.setAttribute("src", imageUrl);
+          el.removeAttribute("data-src");
+        },
+        {
+          once: true
+        }
+      );
+    }
     if (observer === null) {
       const threshold =
         (binding.value && binding.value.threshold) ||
