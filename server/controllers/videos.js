@@ -1,6 +1,14 @@
 const client = require("../twitter");
+const FIVE_MINUTS = require("../constants");
 
+let responseCache = { data: null, expireTime: null };
 module.exports = (req, res) => {
+  const now = new Date().getTime();
+  // Check expire time then return cached data.
+  if (responseCache.expireTime !== null && now > responseCache.expireTime) {
+    res.status(200).send(responseCache.data);
+    return;
+  }
   const q = encodeURIComponent("filter:video") + " min_faves:100";
   const params = { q, result_type: "mixed", count: 50 };
   client.get("search/tweets", params, (error, tweets) => {
@@ -29,6 +37,9 @@ module.exports = (req, res) => {
           return tw;
         });
       res.status(200).send(sortedTweets);
+      // Cache tweets for 5 minutes.
+      responseCache.data = sortedTweets;
+      responseCache.expireTime = new Date().getTime() + FIVE_MINUTS;
     } else {
       res.status(500).send(error);
     }
