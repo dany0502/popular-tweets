@@ -2,7 +2,7 @@ const client = require("../twitter");
 
 module.exports = (req, res) => {
   const q = encodeURIComponent("filter:video") + " min_faves:100";
-  const params = { q, result_type: "mixed", count: 100 };
+  const params = { q, result_type: "mixed", count: 50 };
   client.get("search/tweets", params, (error, tweets) => {
     if (!error) {
       const sortedTweets = tweets.statuses

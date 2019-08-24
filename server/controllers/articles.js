@@ -2,7 +2,7 @@ const client = require("../twitter");
 
 const request = q => {
   return new Promise((resolve, reject) => {
-    const params = { q, result_type: "mixed", count: 100 };
+    const params = { q, result_type: "mixed", count: 50 };
     client.get("search/tweets", params, (error, tweets) => {
       if (!error) {
         resolve(tweets.statuses);
