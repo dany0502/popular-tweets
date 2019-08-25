@@ -29,16 +29,16 @@ module.exports = {
             }
           }
         },
-        {
-          urlPattern: /.*mp4.*/,
-          handler: "networkFirst",
-          options: {
-            cacheName: "video",
-            expiration: {
-              maxAgeSeconds: 60 * 60 * 24
-            }
-          }
-        }
+        // {
+        //   urlPattern: /.*mp4.*/,
+        //   handler: "networkFirst",
+        //   options: {
+        //     cacheName: "video",
+        //     expiration: {
+        //       maxAgeSeconds: 60 * 60 * 24
+        //     }
+        //   }
+        // }
       ]
     }
   }
