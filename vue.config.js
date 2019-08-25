@@ -12,12 +12,28 @@ module.exports = {
     workboxOptions: {
       cacheId: "my-pwa-v1",
       skipWaiting: true,
+      exclude: [
+        /static\/vendor\//,
+        /\.map$/,
+        /favicon\.ico$/,
+        /manifest\.json$/
+      ],
       runtimeCaching: [
         {
           urlPattern: /.*api.*/,
           handler: "networkFirst",
           options: {
             cacheName: "api",
+            expiration: {
+              maxAgeSeconds: 60 * 60 * 24
+            }
+          }
+        },
+        {
+          urlPattern: /.*mp4.*/,
+          handler: "networkFirst",
+          options: {
+            cacheName: "video",
             expiration: {
               maxAgeSeconds: 60 * 60 * 24
             }
