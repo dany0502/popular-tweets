@@ -12,6 +12,12 @@ module.exports = {
     workboxOptions: {
       cacheId: "my-pwa-v1",
       skipWaiting: true,
+      exclude: [
+        /static\/vendor\//,
+        /\.map$/,
+        /favicon\.ico$/,
+        /manifest\.json$/
+      ],
       runtimeCaching: [
         {
           urlPattern: /.*api.*/,
